@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <script src="ChatGPT.js?v=12"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>KK DEVELOPERS</title>
+  <style>
+    body {
+    background-image: linear-gradient(to right, #2f4f4f, #cccccc);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+#idContainer {
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* Add some basic styling */
+#txtOutput {
+    border-radius: 15px 15px 0px 0px;
+    height: 450px;
+    padding: 20px;
+    width: 80%;
+    color: whitesmoke;
+    font-size: 22px;
+    background-color: darkslategray;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    resize: none; /* Disable resizing of the textarea */
+}
+
+/* Add a hover effect */
+#txtOutput:hover {
+    border: 1px solid #333;
+    box-shadow: 0 0 10px #333;
+}
+
+/* Add an animation for when the textarea is focused */
+#txtOutput:focus {
+    animation: textarea-focus 0.2s ease-in-out;
+}
+
+@keyframes textarea-focus {
+    from {
+        border: 1px solid #ccc;
+        box-shadow: none;
+    }
+    to {
+        border: 1px solid #333;
+        box-shadow: 0 0 10px #333;
+    }
+}
+
+
+/* Add some basic styling */
+#txtMsg {
+    width: 85%;
+    border-radius: 0px 0px 15px 15px;
+    padding: 10px;
+    height: 40px;
+    margin-top: 2px;
+    color: whitesmoke;
+    font-size: 22px;
+    background-color: darkslategray;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    resize: none; /* Disable resizing of the textarea */
+}
+
+/* Add a hover effect */
+#txtMsg:hover {
+    border: 1px solid #333;
+    box-shadow: 0 0 10px #333;
+}
+
+/* Add an animation for when the textarea is focused */
+#txtMsg:focus {
+    animation: textarea-focus 0.2s ease-in-out;
+}
+button {
+    border: 1px solid whitesmoke;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: darkslategrey;
+    color: whitesmoke;
+    font-size: 17px;
+    transition: all 0.5s ease;
+    margin-top: -48px;
+}
+
+/* adds a hover effect that changes the background color */
+button:hover {
+  background-color: whitesmoke;
+  color: darkslategrey;
+}
+
+/* adds a press effect that reduces the button's size */
+button:active {
+  transform: scale(0.9);
+}
+
+/* The select box */
+select {
+  width: 200px;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: #f1f1f1;
+  animation: appear 0.3s ease-in-out;
+}
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  animation: fadeIn 2s ease-in;
+}
+
+/* The animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>
+</head>
+<body id="onloading" onclick="onVoice()">
+  <div id="idContainer">
+    <button id="spk" onclick="onSpeech()" style="display: none;"></button>
+    <textarea id="txtOutput" rows="10"></textarea>
+    <textarea id="txtMsg" rows="5" wrap="soft"></textarea>
+    <button type="button" onclick="Send() , onVoice()" id="btnSend">O</button>
+  </div>
+
+<script type="text/javascript">
+  document.getElementById('onloading').click();
+  document.getElementById('spk').click();
+function onVoice() {
+    // Check if the browser supports the Web Speech API
+  if ('webkitSpeechRecognition' in window) {
+    // Create a new instance of the SpeechRecognition object
+    const recognition = new webkitSpeechRecognition();
+
+    // Start listening for speech
+    recognition.start();
+
+    // Set the language of the speech to be recognized
+    recognition.lang = 'en-US';
+
+    // Listen for the result event, which is triggered when speech is detected
+    recognition.addEventListener('result', (event) => {
+    // Get the transcript of the speech
+    const transcript = event.results[0][0].transcript;
+    // Do something with the transcript, like displaying it on the screen
+    document.getElementById('txtMsg').value=transcript;
+    document.getElementById('btnSend').click();
+      });
+    }
+};
+
+function onSpeech() {
+    if ('SpeechSynthesisUtterance' in window) {
+      // Get the SpeechSynthesis object
+      const synth = window.speechSynthesis;
+
+      // Create a new instance of the SpeechSynthesisUtterance object
+      const utterance = new SpeechSynthesisUtterance(sessionStorage.getItem("ans"));
+
+      // Set the language of the speech
+      utterance.lang = 'en-US';
+
+      // Listen for the end event, which is triggered when the speech is complete
+      utterance.onend = function(event) {
+      document.getElementById('onloading').click();
+    }
+
+      // Speak the text
+      synth.speak(utterance);
+    }
+  }
+
+var OPENAI_API_KEY = "";
+
+function Send() {
+    var sQuestion = txtMsg.value;
+    if (sQuestion == "") {
+      alert("Type in your question!");
+      txtMsg.focus();
+      return;
+  }
+
+  var oHttp = new XMLHttpRequest();
+    oHttp.open("POST", "https://api.openai.com/v1/completions");
+    oHttp.setRequestHeader("Accept", "application/json");
+    oHttp.setRequestHeader("Content-Type", "application/json");
+    oHttp.setRequestHeader("Authorization", "Bearer " + "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")
+
+  oHttp.onreadystatechange = function () {
+    if (oHttp.readyState === 4) {
+        //console.log(oHttp.status);
+        var oJson = {}
+        if (txtOutput.value != "") txtOutput.value += "\n";
+
+    try{
+        oJson = JSON.parse(oHttp.responseText);
+      } catch (ex) {
+        txtOutput.value += "Error: " + ex.message
+      }
+
+      if (oJson.error && oJson.error.message) {
+        txtOutput.value += "Error: " + oJson.error.message;
+      } else if (oJson.choices && oJson.choices[0].text) {
+        var s = oJson.choices[0].text;
+
+        if (s == "") s = "No response";
+          txtOutput.value += "Bilal's Assistant" + s;
+          console.log(s);
+          sessionStorage.setItem('ans',s);
+          document.getElementById('spk').onclick();
+        }      
+      }
+    };
+
+
+    var sModel = "text-davinci-003";
+    var iMaxTokens = 2048;
+    var sUserId = "1";
+    var dTemperature = 0.5;  
+    var data = {
+      model: sModel,
+      prompt: sQuestion,
+      max_tokens: iMaxTokens,
+      user: sUserId,
+      temperature: dTemperature,
+      frequency_penalty: 0.0, 
+      presence_penalty: 0.0, 
+      stop: ["#", ";"]
+  }
+  oHttp.send(JSON.stringify(data));
+    if (txtOutput.value != "") txtOutput.value += "\n";
+      txtOutput.value += "Your Question is that : "+ sQuestion+" !!! \n";
+      txtMsg.value = "";
+  }
+
+
+</script>
+</body>
+</html>
+

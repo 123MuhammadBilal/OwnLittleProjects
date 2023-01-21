@@ -1,0 +1,153 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.ChatContainer {
+	overflow-x: hidden;
+  	overflow-y: visible;
+    background: white;
+    max-width: 1000px;
+    margin: 20px auto;
+    border-radius: 15px;
+    border: 2px solid #fca01952;
+}
+.ChatHeader {
+    float: left;
+    width: 100%;
+    background: #000000;
+    border-radius: 15px 15px 0px 0px;
+    padding: 7px 7px 7px 7px;
+}
+.headman1 {
+    width: 10%;
+    float: left;
+    margin: 0px 10px;
+}
+.headman2 {
+    text-align: center;
+    width: 74%;
+    float: left;
+    margin: 0px 10px;
+    color: #fca019;
+    font-size: 25px;
+}
+.headman3 {
+    color: #fca019;
+    cursor: pointer;
+    font-size: 34px;
+    width: 5%;
+    float: left;
+    margin: 10px;
+}
+.headman1 img{
+    width: 100%;
+    border-radius: 45px;
+}
+.sender {
+    width: 100%;
+    float: left;
+    height: 45px;
+    background: #000000;
+    border-radius: 0px 0px 15px 15px;
+    padding: 10px 0px 0px 1px;
+}
+.sender :focus-visible {
+    outline: -webkit-focus-ring-color auto 0px !important;
+    border: 0px solid white !important;
+}
+.button {
+    cursor: pointer;
+    width: 4%;
+    float: right;
+    font-size: 25px;
+    color: #000000;
+    padding: 0px 18px 3px 40px;
+    background-color: #fca019;
+    border-radius: 30px;
+    margin: 0px 10px;
+}
+
+.input input {
+    color: #000000;
+    font-size: 18px;
+    background-color: #fca019;
+    width: 85%;
+    outline: -webkit-focus-ring-color auto 0px !important;
+    border: 0px solid white !important;
+    padding: 7px 10px 7px 10px;
+    float: left;
+    margin: 0px 0px 0px 10px;
+    border-radius: 30px;
+}
+
+.innerChat {
+    flex: 1 1 0%;
+    overflow: hidden scroll;
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: column;
+    position: relative;
+    scroll-behavior: smooth;
+    padding: 8px 16px 8px 16px;
+    height: 70vh;
+}
+
+
+.innerChat li {
+    list-style-type: none;
+    background: #000000;
+    font-size: 15px;
+    text-align: left;
+    color: white;
+    margin: 5px 0px;
+    padding: 10px;
+    box-shadow: rgb(6 19 43 / 4%) 0px 0px 1px 1px;
+}
+.innerChat h5 {
+    float: left;
+    color: #000000;
+    background-color: #fca019;
+    padding: 8px 20px;
+    margin: 2px 5px 0px 4px;
+}
+
+.addClass{
+	display: none;
+}
+
+.clsr {
+    background-color: #fca019;
+    float: left;
+    width: 100%;
+    text-align: center;
+    padding: 80px 0px 0px 0px;
+}
+.clsr h1{
+    cursor: pointer;
+    color: #000000;
+    opacity: 0.9;
+    text-align: center;
+    font-size: 40px;
+    text-shadow: 3px 0px 4px rgb(252 160 25), -3px 0px 6px rgb(252 160 25), 0px 6px 5px rgb(0 0 0);
+    word-spacing: 27px;
+    letter-spacing: 5px;
+    text-decoration: none;
+    border-block-start-width: 1px;
+    padding: 30px 15px;
+
+}
+
+.clsr h2{
+    cursor: pointer;
+    color: #000000;
+    opacity: 0.9;
+    text-align: center;
+    font-size: 40px;
+    text-shadow: 3px 0px 4px rgb(252 160 25), -3px 0px 6px rgb(252 160 25), 0px 6px 5px rgb(0 0 0);
+    word-spacing: 27px;
+    letter-spacing: 5px;
+    text-decoration: none;
+    border-block-start-width: 1px;
+    padding: 30px 15px;
+
+}
