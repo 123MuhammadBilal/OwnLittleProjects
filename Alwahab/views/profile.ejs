@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <!-- <link rel="stylesheet" href="/public/style.css"> -->
     <title>Profile Page</title>
-    <style>
-    h1{
-        background-color:black;
-        color:white;
-    }
-    
-</style>
 </head>
 <body>
-<!-- <%- include('common/header') %> -->
-<div class="proContainer">
-    <div class="outPro">
-        <h1>MOBILE DETAILS</h1>
-        <form action="">
-            <label for="cellName">Company</label><br>
-            <input type="text" name="cellName" id="cellName"><br>
-            <label for="cellModele">Modele</label><br>
-            <input type="text" name="cellModele" id="cellModele"><br>
-            <label for="cellimi1">IMI 1</label><br>
-            <input type="text" name="cellimi1" id="cellimi1"><br>
-            <label for="cellimi2">IMI 2</label><br>
-            <input type="text" name="cellimi2" id="cellimi2"><br><br>
-            <input type="submit" name="submit" id="submit" value="ADD">
-        </form>
-    </div>
-</div>
-<!-- <%- include('common/footer') %> -->
+    <%- include('common/style') %>
+    <%- include('common/header') %>
+        <div class="proContainer">
+            <div class="outPro">
+                <h1>MOBILE DETAILS</h1>
+                <form method="POST" action="/submit-form">
+                    <label for="cellName">Company</label><br>
+                    <input type="text" name="cellName" id="cellName" required autocomplete="off"><br>
+                    <label for="cellModele">Modele</label><br>
+                    <input type="text" name="cellModele" id="cellModele" required autocomplete="off"><br>
+                    <label for="cellimi1">IMI 1</label><br>
+                    <input type="number" name="cellimi1" id="cellimi1" required autocomplete="off"><br>
+                    <label for="cellimi2">IMI 2</label><br>
+                    <input type="number" name="cellimi2" id="cellimi2" required autocomplete="off"><br><br>
+                    <div class="button">
+                    <input type="submit" name="submit" id="submit" value="ADD">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <%- include('common/footer') %>
 </body>
+
 </html>
