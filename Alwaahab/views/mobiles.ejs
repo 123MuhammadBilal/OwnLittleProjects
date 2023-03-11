@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mobiles</title>
+</head>
+<body>
+    <%- include('common/header') %>
+    <div class="showz">
+        
+    <h1>mobiles<input type="search" name="search" id="search" placeholder="Fitter Seach" autocomplete="off"></h1>
+    
+    <ul id="list">
+        <% for (var i = 0; i < profiles.length; i++) { %>
+          <li>
+          <span>COMPANY: </span><p><%= profiles[i].cellName %></p><span>MODELE :</span><p><%= profiles[i].cellModele %></p><span>EIMI 1 :</span><p><%= profiles[i].cellimi1 %></p><span>EIMI 2 :</span><p><%= profiles[i].cellimi2 %></p>
+          </li>
+        <% } %>
+    </ul>
+    </div>
+    <%- include('common/footer') %>
+    <script>
+        //seach input
+        const input = document.getElementById("search");
+        // "list" is id of "ul"
+        const list = document.getElementById("list");
+        // select "li" fom list="ul"
+        const items = list.getElementsByTagName("li");
+        //addEventListener "keyup"
+        input.addEventListener("keyup", function () {
+            // debugger
+            // using forloop to get all "li" innerText
+            for (let i = 0; i < items.length; i++) {
+                //'li' items get in list 
+                const item = items[i];
+                // console.log(item)
+                //get the innerText of "li"
+                const text = item.textContent || item.innerText;
+                // console.log(text)
+                // debugger
+                //match that which list item have "input.value" using "indexOf()"
+                //if lenght of 'input' have lenght then ' -1 < input.value ' and its show just matched item
+                if (text.toLowerCase().indexOf(input.value.toLowerCase()) > -1) {
+                    //show matching items
+                    item.style.display = "block";
+                } else {
+                    //the items that will not  match with "indexOf(input.value)" will hide
+                    item.style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

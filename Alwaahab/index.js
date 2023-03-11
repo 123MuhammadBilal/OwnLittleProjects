@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 const dName = "alwahabmobiles";
 
 // my url of database
-const uri = `mongodb+srv://muhammadbilal:mynameiskhan@cluster0.23rabtf.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb://127.0.0.1:27017/${dName}`;
 
 //for stay away form Deprecation Warning
 mongoose.set("strictQuery", false);
@@ -69,18 +69,9 @@ app.listen(3000, function () {
 });
 
 // let me work on database
-(async () => {
-   try {
-   await mongoose.connect(uri, {
-      bufferCommands: false,
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error("Error connecting to MongoDB", error);
-  }
-})();
+mongoose.connect(uri, {  useNewUrlParser: true},()=>{
+  console.log("Connected to MongoDB");
+})
 
 // Set up Mongoose and connect to MongoDB
 const profileSchema = new mongoose.Schema({

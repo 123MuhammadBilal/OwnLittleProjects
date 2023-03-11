@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%- include('common/style') %>
+    <%- include('common/header') %>
+    <h1>Contact</h1>
+    <div class="news_letter">
+        <h1>NEWS LETTER</h1>
+        <div class="news_letter_container">
+            <form method="POST" action="/subscription_from">
+                <input type="mail" name="subscription_mail" id="subscription_mail" autocomplete="off" required>
+                <div class="button">
+                <input type="submit" name="subscription" id="subscription" value="subscribe">
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include('common/footer') %>
+</body>
+</html>
